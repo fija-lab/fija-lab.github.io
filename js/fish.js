@@ -21,12 +21,7 @@ class Fish {
         // c.translate(this.x+W/2, this.y+H/2);
         // c.rotate(this.angle * Math.PI / 180);
 
-        c.beginPath();
-        c.moveTo(this.x, this.y);
-        c.lineTo(this.y, this.y);
-        c.lineTo(this.x, this.x);
-        c.stroke();
-        c.closePath();
+        c.rect(this.x, this.y, this.sizeA, this.sizeB)
         // c.rect(this.x, this.y, this.sizeA, this.sizeB);
         c.fillStyle = this.color;
         c.fill();
