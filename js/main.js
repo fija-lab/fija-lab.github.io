@@ -24,7 +24,7 @@ window.onload = function() {
   }
 
   setInterval(() => {
-
+    draw(canvas);
   }, INTERVAL);
 
 }
@@ -46,8 +46,12 @@ function Cell(i, j) {
   }
 }
 
-function draw() {
+function draw(canvas) {
   var c = canvas.getContext('2d');
+  drawCanvas(canvas);
+
+  // ok now this should do it;
+//  lets test
 }
 
 function drawCanvas(canvas) {
