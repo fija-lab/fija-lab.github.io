@@ -47,11 +47,15 @@ function Cell(i, j) {
 }
 
 function draw() {
-
+  var c = canvas.getContext('2d');
 }
 
-function drawCanvas() {
+function drawCanvas(canvas) {
+  var c = canvas.getContext('2d');
 
+  grid.forEach((g) => {
+      g.show(c);
+  });
 }
 
 function update() {
