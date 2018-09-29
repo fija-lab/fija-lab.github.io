@@ -1,11 +1,14 @@
 var W = 800;
 var H = 600;
 var INTERVAL = 15;
-var canvas = document.getElementById("canvas");
-var context = canvas.getContext("2d");
-var res = 50;
-var grid = [], rows = Math.floor(W / res), cols = Math.floor(H / res);
+var canvas;
+var context;
+var res = 40;
+var grid = [];
+var rows = Math.floor(W / res), cols = Math.floor(H / res);
 var fish;
+var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
+
 /*
 Ok so:
 - Grid (just cuz i like grids);
@@ -16,14 +19,19 @@ Ok so:
 
 window.onload = function() {
 
-  for(var i; i < rows; i++) {
-    for(var j; j < cols; j++) {
-      var cell = new Cell(i, j);
-      grid.push(cell);
-    }
-  }
+    canvas = document.getElementById("canvas");
+    context = canvas.getContext("2d");
+    fish = new Fish();
+    for(var i = 0; i < rows; i++) {
+        for(var j = 0; j < cols; j++) {
+          var cell = new Cell(i, j);
+          grid.push(cell);
+        }
+      }
 
   setInterval(() => {
+    
+    update();
     draw(canvas);
   }, INTERVAL);
 
@@ -32,15 +40,15 @@ window.onload = function() {
 function Cell(i, j) {
   this.i = i;
   this.j = j;
+  this.x = this.i*res;
+  this.y = this.j*res;
 
   this.show = function(c) {
-    this.x = this.i*res;
-    this.y = this.j*res;
 
     c.beginPath();
     c.rect(this.x, this.y, res, res);
     c.stroke();
-    c.fillStyle === "#1a7a3f";
+    c.fillStyle = "#255";
     c.fill();
 
   }
@@ -49,9 +57,8 @@ function Cell(i, j) {
 function draw(canvas) {
   var c = canvas.getContext('2d');
   drawCanvas(canvas);
-
-  // ok now this should do it;
-//  lets test
+  
+  fish.draw(c);    
 }
 
 function drawCanvas(canvas) {
@@ -64,4 +71,12 @@ function drawCanvas(canvas) {
 
 function update() {
 
+    fish.update();
+    fish.move();
+
 }
+
+
+function dist(ax, ay, bx, by) {
+    return Math.floor(Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
+ }
